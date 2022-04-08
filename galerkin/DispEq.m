@@ -10,12 +10,16 @@ e2 = 1;
 
 n = 1;
 
-M = 5;
-K = 5;
+M = 3;
+K = 3;
 
-BETA_BEGIN = 0.01;
+% BETA_BEGIN = 0.01;
+% BETA_STEP = 0.01;
+% BETA_END = sqrt(e1) - BETA_STEP;
+
+BETA_BEGIN = 0.7;
 BETA_STEP = 0.01;
-BETA_END = sqrt(e1) - BETA_STEP;
+BETA_END = 0.7;
 
 Norm = 10e0;
 intTol = 1.0e-8;
@@ -23,7 +27,8 @@ begOfIntReg = 0;
 
 FREQ_BEGIN = 5;
 FREQ_STEP = 1;
-FREQ_END = 50;
+FREQ_END = 5;
+FREQ_SCALE = 10^9;
 
 radius = 0.02;
 %==========================================================================
@@ -36,7 +41,7 @@ freq = FREQ_BEGIN;
 de = e0 * (e2 - e1) / radius;
 
 while freq <= FREQ_END
-    w = 2 * pi * freq * 10^9;
+    w = 2 * pi * freq * FREQ_SCALE;
     k0 = w / C_LIGHT;
 
     for beta = BETA_BEGIN:BETA_STEP:BETA_END
@@ -118,16 +123,18 @@ while freq <= FREQ_END
     ansBeta = betas(ansIndexes);
 
     for i = 1:1:size(ansBeta, 2)
-        wAns(Ind) = freq * 10^9;
+        wAns(Ind) = freq * FREQ_SCALE;
         betaAns(Ind) = ansBeta(i) - BETA_STEP / 2;
         Ind = Ind + 1;
     end
 
-    d = diff(matrixDets);
-    %matrixDets = [];
+    %d = diff(matrixDets);
+    matrixDets = [];
     betas = [];
     Index = 1;
+
     freq = freq + FREQ_STEP;
+
 end
 
 plot(wAns, betaAns, '.');
