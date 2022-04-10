@@ -9,8 +9,8 @@ function retVal = zerosIndexes(vector)
     for i = 1:1:size(vectorZeroInds, 2)
         diffMinInd = vectorZeroInds(i) - neighborhood;
 
-        if (diffMinInd < 0)
-            diffMinInd = 0;
+        if (diffMinInd < 1)
+            diffMinInd = 1;
         end
 
         diffMaxInd = vectorZeroInds(i) + neighborhood;

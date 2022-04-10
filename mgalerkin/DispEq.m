@@ -23,7 +23,7 @@ begOfIntReg = 0;
 
 FREQ_BEGIN = 0.1;
 FREQ_STEP = 0.1;
-FREQ_END = 1;
+FREQ_END = 50;
 FREQ_SCALE = 10^9;
 
 radius = 0.02;
